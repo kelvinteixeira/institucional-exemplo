@@ -1,56 +1,73 @@
-# React + TypeScript + Vite
+# 🚀 CodeVibe Solutions - Plataforma Digital Corporativa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💡 Sobre o Projeto
 
-Currently, two official plugins are available:
+Aplicação web desenvolvida estrategicamente para **CodeVibe Solutions**, representando nosso compromisso com:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Excelência Digital**: Plataforma moderna que reflete nossa expertise em soluções tecnológicas  
+- **Engajamento Cliente**: Experiência intuitiva que facilita o acesso a nossos serviços  
+- **Transparência**: Apresentação clara de nossas capacidades e diferenciais competitivos  
 
-## Expanding the ESLint configuration
+Este projeto corporativo foi meticulosamente arquitetado para:  
+✔ Consolidar nosso posicionamento de mercado  
+✔ Otimizar processos de captação e relacionamento  
+✔ Demonstrar cases e metodologias de trabalho  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<div align="center">
+  <img src="./public/images/showcase1.png" width="30%">
+  <img src="./public/images/showcase2.png" width="30%">
+  <img src="./public/images/showcase3.png" width="30%">
+</div>
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## ✨ Diferenciais Estratégicos
+
+| Característica | Benefício |
+|---------------|-----------|
+| Design Institucional | Reflete profissionalismo e inovação |
+| Arquitetura Modular | Facilita atualizações constantes |
+| Performance Otimizada | Redução de bounce rate |
+| SEO Aplicado | Maior visibilidade orgânica |
+| Analytics Integrado | Mensuração de conversões |
+
+> "Mais que um site, uma ferramenta estratégica para crescimento de negócios" - CEO CodeVibe
+
+#### <div align="right">- Projeto Em andamento 🟢 <div>
+
+## Tecnologias usadas
+
+- React
+- Typescript
+- Material ui
+
+## Requisitos
+
+Para executar a aplicação é necessário instalar algumas ferramentas tais como um editor de códigos para realizar compilação dos mesmos. Nesse projeto foi utilizado o [Visual Studio Code](https://code.visualstudio.com/), [NodeJS](https://nodejs.org/en/) para compilação do código, [Git Bash](https://gitforwindows.org/) para baixar o repositório e baixar todas as dependências necessárias.
+
+```bash
+# Baixe o repositório.
+$ https://github.com/kelvinteixeira/site-official-alenilson.git
+# Acesse a pasta do projeto.
+$ cd site-oficial-alenilson
+
+# Agora que baixou e acessou o repositório, vamos começar a instalação das dependências.
+$ yarn ( caso não utilize o yarn execute apenas npm install)
+
+# Depois de instalado todas as dependências, abra a aplicação via vscode.
+$ code .
+
+# Agore execute a aplicação.
+$ yarn dev (caso não utilize o yarn: npm run dev)
+
+# A aplicação iniciará na porta 5173
+# No navegador digite: http://localhost:5173/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### <div align="center">Aplicação desenvolvida por mim. Gostou? tem alguma sugestão de melhoria? por favor, entre em contato e ja me adiciona. :D
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+<div>
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
-# codevibe
-# codevibe
+<div align="center"> 
+  <a href="https://instagram.com/kelvinteixeira_" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
+  <a href = "mailto:kelvin.teixeira.santos@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+  <a href="https://www.linkedin.com/in/kelvin-teixeira-8707b41a8/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+  </div>
