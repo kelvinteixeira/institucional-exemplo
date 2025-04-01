@@ -5,7 +5,7 @@ import { HomePage } from "./screen/Home";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <LoginCard />,
   },
   {
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <RegisterCard />,
   },
   {
-    path: "/home",
+    path: "/",
     element: <HomePage />,
   },
 ]);
