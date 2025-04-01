@@ -45,9 +45,9 @@ Para executar a aplicação é necessário instalar algumas ferramentas tais com
 
 ```bash
 # Baixe o repositório.
-$ https://github.com/kelvinteixeira/site-official-alenilson.git
+$ https://github.com/kelvinteixeira/codevibe.git
 # Acesse a pasta do projeto.
-$ cd site-oficial-alenilson
+$ cd codevibe
 
 # Agora que baixou e acessou o repositório, vamos começar a instalação das dependências.
 $ yarn ( caso não utilize o yarn execute apenas npm install)
