@@ -31,8 +31,6 @@ Este projeto corporativo foi meticulosamente arquitetado para:
 
 > "Mais que um site, uma ferramenta estratégica para crescimento de negócios" - CEO CodeVibe
 
-#### <div align="right">- Projeto Em andamento 🟢 <div>
-
 ## Tecnologias usadas
 
 - React
