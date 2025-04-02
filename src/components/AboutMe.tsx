@@ -1,16 +1,18 @@
-import { Box, Container, Grid, Typography, Button, Avatar, Chip, Divider } from "@mui/material";
+import { Box, Container, Grid, Typography, Button, Avatar, Chip, Divider, useTheme } from "@mui/material";
 import { Code, DesignServices, SettingsSuggest } from "@mui/icons-material";
 
 export const AboutMe = () => {
+  const theme = useTheme();
+
   return (
     <Box
       id="aboutme"
       sx={{
-        py: 12,
+        py: { xs: 6, sm: 8, md: 10, lg: 12 },
         backgroundImage: "url(/images/bg8.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: { xs: "scroll", md: "fixed" },
         backgroundColor: "rgba(1, 6, 25, 0.85)",
         backgroundBlendMode: "overlay",
       }}
@@ -21,16 +23,18 @@ export const AboutMe = () => {
           align="center"
           sx={{
             fontWeight: 700,
-            mb: 8,
+            mb: { xs: 4, sm: 6, md: 8 },
+            px: { xs: 2, sm: 0 },
+            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
             textShadow: "0 2px 10px rgba(0,0,0,0.3)",
             position: "relative",
             "&:after": {
               content: '""',
               display: "block",
-              width: "80px",
+              width: { xs: '60px', sm: '80px' },
               height: "4px",
               backgroundColor: "primary.main",
-              margin: "20px auto 0",
+              margin: { xs: "16px auto 0", sm: "20px auto 0" },
               borderRadius: 2
             }
           }}
@@ -38,7 +42,7 @@ export const AboutMe = () => {
           Por trás da Codevibe Solutions
         </Typography>
 
-        <Grid container spacing={8} alignItems="center">
+        <Grid container spacing={{ xs: 4, sm: 6, md: 8 }} alignItems="center">
           <Grid item xs={12} md={5}>
             <Box
               sx={{
@@ -47,7 +51,7 @@ export const AboutMe = () => {
                 mx: "auto",
                 "&:hover": {
                   "&:after": {
-                    transform: "translate(15px, 15px)"
+                    transform: { xs: 'none', md: "translate(15px, 15px)" }
                   }
                 }
               }}
@@ -77,6 +81,7 @@ export const AboutMe = () => {
                   borderRadius: 3,
                   zIndex: 1,
                   transition: "transform 0.3s ease",
+                  display: { xs: "none", md: "block" }
                 }}
               />
             </Box>
@@ -89,8 +94,12 @@ export const AboutMe = () => {
                 backdropFilter: "blur(10px)",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 borderRadius: 3,
-                p: 5,
+                p: { xs: 3, sm: 4, md: 5 },
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  borderColor: theme.palette.primary.main
+                }
               }}
             >
               <Typography
@@ -100,7 +109,8 @@ export const AboutMe = () => {
                   mb: 2,
                   background: "linear-gradient(90deg, #FFFFFF 0%, #AAAAAA 100%)",
                   WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent"
+                  WebkitTextFillColor: "transparent",
+                  fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' }
                 }}
               >
                 Kelvin Teixeira
@@ -109,17 +119,25 @@ export const AboutMe = () => {
               <Chip
                 label="Desenvolvedor Full-Stack"
                 color="primary"
-                sx={{ mb: 3, px: 1, fontWeight: 600 }}
+                sx={{ 
+                  mb: { xs: 2, sm: 3 },
+                  px: 1, 
+                  fontWeight: 600,
+                  fontSize: { xs: '0.875rem', sm: '0.9375rem' }
+                }}
               />
 
-              <Divider sx={{ my: 3, borderColor: "rgba(255, 255, 255, 0.1)" }} />
+              <Divider sx={{ 
+                my: { xs: 2, sm: 3 },
+                borderColor: "rgba(255, 255, 255, 0.1)" 
+              }} />
 
               <Typography
                 variant="body1"
                 sx={{
-                  mb: 3,
+                  mb: { xs: 2, sm: 3 },
                   lineHeight: 1.8,
-                  fontSize: "1.1rem",
+                  fontSize: { xs: '1rem', sm: '1.1rem' },
                   opacity: 0.9
                 }}
               >
@@ -128,21 +146,28 @@ export const AboutMe = () => {
                 design intuitivo com performance excepcional.
               </Typography>
 
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 4 }}>
+              <Box sx={{ 
+                display: "flex", 
+                flexWrap: "wrap", 
+                gap: { xs: 1, sm: 1.5 },
+                mb: { xs: 3, sm: 4 }
+              }}>
                 {[
-                  { icon: <Code />, label: "React/Next.js" },
-                  { icon: <DesignServices />, label: "UI/UX Design" },
-                  { icon: <SettingsSuggest />, label: "Node.js" },
+                  { icon: <Code sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />, label: "React/Next.js" },
+                  { icon: <DesignServices sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />, label: "UI/UX Design" },
+                  { icon: <SettingsSuggest sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />, label: "Node.js" },
                 ].map((skill, index) => (
                   <Chip
                     key={index}
                     icon={skill.icon}
                     label={skill.label}
+                    size="medium"
                     sx={{
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
                       border: "1px solid rgba(255, 255, 255, 0.1)",
                       color: "white",
-                      "& .MuiChip-icon": { color: "primary.main" }
+                      "& .MuiChip-icon": { color: "primary.main" },
+                      fontSize: { xs: '0.875rem', sm: '0.9375rem' }
                     }}
                   />
                 ))}
@@ -154,11 +179,16 @@ export const AboutMe = () => {
                 size="large"
                 href="#contact"
                 sx={{
-                  px: 4,
-                  py: 1.5,
+                  px: { xs: 3, sm: 4 },
+                  py: { xs: 1, sm: 1.5 },
                   fontWeight: 600,
                   borderWidth: 2,
-                  "&:hover": { borderWidth: 2 }
+                  "&:hover": { 
+                    borderWidth: 2,
+                    transform: 'translateY(-2px)'
+                  },
+                  width: { xs: '100%', sm: 'auto' },
+                  fontSize: { xs: '0.9375rem', sm: '1rem' }
                 }}
               >
                 Vamos conversar

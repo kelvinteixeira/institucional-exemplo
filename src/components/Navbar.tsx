@@ -1,6 +1,31 @@
-import { Box, Container, Grid, Button } from "@mui/material";
+import { useState } from 'react';
+import { 
+  Box, 
+  Container, 
+  AppBar, 
+  Toolbar, 
+  Button, 
+  IconButton, 
+  Drawer, 
+  List, 
+  ListItem, 
+  ListItemButton,
+  ListItemText,
+  useTheme,
+  useMediaQuery
+} from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const Navbar = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   // Função para rolagem suave com offset para o navbar
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -12,54 +37,114 @@ export const Navbar = () => {
         top: offset,
         behavior: "smooth"
       });
+      setMobileOpen(false); // Fecha o drawer após clicar em um link
     }
   };
 
+  const navItems = [
+    { label: "Diferencial", id: "features" },
+    { label: "Desenvolvimento", id: "howitworks" },
+    { label: "Quem somos", id: "aboutme" },
+    { label: "Depoimentos", id: "customers" },
+    { label: "Dúvidas", id: "faq" },
+    { label: "Fale conosco", id: "contact", isHighlighted: true }
+  ];
+
+  const drawer = (
+    <Box sx={{ 
+      width: 250,
+      backgroundColor: "#010619",
+      height: '100%',
+      py: 2
+    }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'flex-end',
+        px: 2
+      }}>
+        <IconButton onClick={handleDrawerToggle}>
+          <CloseIcon sx={{ color: 'white' }} />
+        </IconButton>
+      </Box>
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.id} disablePadding>
+            <ListItemButton 
+              onClick={() => scrollTo(item.id)}
+              sx={{
+                color: item.isHighlighted ? theme.palette.primary.main : 'white',
+                fontWeight: item.isHighlighted ? 600 : 500,
+                py: 1.5,
+                px: 3
+              }}
+            >
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
-    <Box
-      component="nav" // Adicionamos component="nav" para facilitar a seleção
+    <AppBar 
+      component="nav"
+      position="sticky"
       sx={{
         backgroundColor: "#010619",
         backdropFilter: "blur(10px)",
         borderBottom: "2px solid #9336be",
-        py: 2,
-        px: 4,
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
+        boxShadow: 'none',
+        py: 1
       }}
     >
       <Container maxWidth="lg">
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Button onClick={() => scrollTo("home")} sx={{ p: 0 }}>
-                <img
-                  src="/images/codevibeLogo.png"
-                  alt="CodeVibe Logo"
-                  style={{ height: 120, cursor: "pointer" }}
-                />
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              {[
-                { label: "Diferencial", id: "features" },
-                { label: "Desenvolvimento", id: "howitworks" },
-                { label: "Quem somos", id: "aboutme" },
-                { label: "Depoimentos", id: "customers" },
-                { label: "Dúvidas", id: "faq" },
-              ].map((item) => (
+        <Toolbar sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between',
+          px: { xs: 0, md: 2 }
+        }}>
+          <Button onClick={() => scrollTo("home")} sx={{ p: 0 }}>
+            <img
+              src="/images/codevibeLogo.png"
+              alt="CodeVibe Logo"
+              style={{ 
+                height: isMobile ? 80 : 100, 
+                cursor: "pointer",
+                transition: 'all 0.3s ease'
+              }}
+            />
+          </Button>
+
+          {isMobile ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerToggle}
+              sx={{ 
+                color: 'white',
+                '&:hover': {
+                  color: theme.palette.primary.main
+                }
+              }}
+            >
+              <MenuIcon fontSize="large" />
+            </IconButton>
+          ) : (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              {navItems.map((item) => (
                 <Button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
                   sx={{
-                    color: "white",
-                    fontWeight: 500,
+                    color: item.isHighlighted ? theme.palette.primary.main : 'white',
+                    fontWeight: item.isHighlighted ? 600 : 500,
                     textTransform: "none",
+                    fontSize: '1rem',
+                    mx: 0.5,
                     "&:hover": {
-                      color: "primary.main",
+                      color: theme.palette.primary.main,
                       backgroundColor: "transparent",
                     },
                   }}
@@ -67,20 +152,28 @@ export const Navbar = () => {
                   {item.label}
                 </Button>
               ))}
-              <Button
-                onClick={() => scrollTo("contact")}
-                sx={{
-                  color: "primary.main",
-                  fontWeight: 600,
-                  textTransform: "none",
-                }}
-              >
-                Fale conosco
-              </Button>
             </Box>
-          </Grid>
-        </Grid>
+          )}
+        </Toolbar>
       </Container>
-    </Box>
+
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            backgroundColor: 'rgba(1, 6, 25, 0.95)',
+            backdropFilter: 'blur(10px)'
+          },
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </AppBar>
   );
 };

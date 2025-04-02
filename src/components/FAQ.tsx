@@ -12,11 +12,13 @@ import {
   Grid,
   Paper,
   Chip,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 
 export const FAQ = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
+  const theme = useTheme();
   
   const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
@@ -26,10 +28,12 @@ export const FAQ = () => {
     <Box
       id="faq"
       sx={{
-        py: 10,
+        py: { xs: 6, sm: 8, md: 10 },
         backgroundImage: "url(/images/bg7.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundColor: "rgba(1, 6, 25, 0.7)",
+        backgroundBlendMode: "overlay",
         transform: "scaleX(-1)",
         "& > *": {
           transform: "scaleX(-1)",
@@ -42,7 +46,9 @@ export const FAQ = () => {
           align="center"
           sx={{
             fontWeight: 700,
-            mb: 8,
+            mb: { xs: 4, sm: 6, md: 8 },
+            px: { xs: 2, sm: 0 },
+            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
             textShadow: "0 2px 8px rgba(0,0,0,0.2)",
           }}
         >
@@ -54,8 +60,10 @@ export const FAQ = () => {
             question: "Quanto tempo leva para desenvolver meu site?",
             answer: (
               <Box>
-                <Typography paragraph>O prazo varia conforme a complexidade:</Typography>
-                <List dense sx={{ listStyleType: 'disc', pl: 4, mb: 2 }}>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
+                  O prazo varia conforme a complexidade:
+                </Typography>
+                <List dense sx={{ listStyleType: 'disc', pl: { xs: 3, sm: 4 }, mb: 2 }}>
                   {[
                     { primary: "Landing pages:", secondary: "7 a 14 dias" },
                     { primary: "Sites institucionais:", secondary: "3 a 6 semanas" },
@@ -64,12 +72,14 @@ export const FAQ = () => {
                     <ListItem key={index} sx={{ display: 'list-item', py: 0 }}>
                       <ListItemText 
                         primary={<strong>{item.primary}</strong>} 
-                        secondary={item.secondary} 
+                        secondary={item.secondary}
+                        primaryTypographyProps={{ fontSize: { xs: '0.9rem', sm: '0.95rem' } }}
+                        secondaryTypographyProps={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}
                       />
                     </ListItem>
                   ))}
                 </List>
-                <Typography>
+                <Typography sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Garantimos um cronograma claro desde a primeira reunião, com
                   entregas parciais semanais para seu acompanhamento.
                 </Typography>
@@ -80,21 +90,28 @@ export const FAQ = () => {
             question: "Quais tecnologias vocês usam? Meu site ficará lento?",
             answer: (
               <Box>
-                <Typography paragraph>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Utilizamos stacks modernas e otimizadas para cada camada do projeto:
                 </Typography>
 
-                <Grid container spacing={2} sx={{ mb: 2 }}>
+                <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ mb: 2 }}>
                   {/* Front-end */}
-                  <Grid item xs={12} md={4}>
-                    <Paper elevation={0} sx={{ p: 2, bgcolor: 'rgba(0, 119, 204, 0.1)' }}>
-                      <Typography variant="h6" color="primary" gutterBottom>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Paper elevation={0} sx={{ 
+                      p: { xs: 1.5, sm: 2 }, 
+                      bgcolor: 'rgba(0, 119, 204, 0.1)',
+                      height: '100%'
+                    }}>
+                      <Typography variant="h6" color="primary" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.1rem' } }}>
                         Front-end
                       </Typography>
                       <List dense>
                         {['React/Next.js', 'TypeScript', 'Tailwind CSS/MUI', 'GSAP para animações'].map((tech) => (
                           <ListItem key={tech} sx={{ py: 0 }}>
-                            <ListItemText primary={tech} />
+                            <ListItemText 
+                              primary={tech} 
+                              primaryTypographyProps={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}
+                            />
                           </ListItem>
                         ))}
                       </List>
@@ -102,25 +119,36 @@ export const FAQ = () => {
                   </Grid>
 
                   {/* Back-end & APIs */}
-                  <Grid item xs={12} md={4}>
-                    <Paper elevation={0} sx={{ p: 2, bgcolor: 'rgba(46, 125, 50, 0.1)' }}>
-                      <Typography variant="h6" color="success.main" gutterBottom>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Paper elevation={0} sx={{ 
+                      p: { xs: 1.5, sm: 2 },
+                      bgcolor: 'rgba(46, 125, 50, 0.1)',
+                      height: '100%'
+                    }}>
+                      <Typography variant="h6" color="success.main" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.1rem' } }}>
                         Back-end & APIs
                       </Typography>
                       <List dense>
                         {['Node.js/NestJS', 'Python/Django', 'GraphQL/REST', 'WebSockets'].map((tech) => (
                           <ListItem key={tech} sx={{ py: 0 }}>
-                            <ListItemText primary={tech} />
+                            <ListItemText 
+                              primary={tech} 
+                              primaryTypographyProps={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}
+                            />
                           </ListItem>
                         ))}
                         <ListItem sx={{ py: 0 }}>
                           <ListItemText 
                             primary="Integração com:" 
+                            primaryTypographyProps={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}
                             secondary={
                               <List dense>
                                 {['Pagamentos (Stripe, PayPal)', 'SMTP (SendGrid, Mailchimp)', 'Redes Sociais'].map((item) => (
                                   <ListItem key={item} sx={{ py: 0 }}>
-                                    <ListItemText primary={item} />
+                                    <ListItemText 
+                                      primary={item} 
+                                      primaryTypographyProps={{ fontSize: { xs: '0.8rem', sm: '0.85rem' } }}
+                                    />
                                   </ListItem>
                                 ))}
                               </List>
@@ -132,15 +160,22 @@ export const FAQ = () => {
                   </Grid>
 
                   {/* Bancos de Dados */}
-                  <Grid item xs={12} md={4}>
-                    <Paper elevation={0} sx={{ p: 2, bgcolor: 'rgba(198, 40, 40, 0.1)' }}>
-                      <Typography variant="h6" color="error.main" gutterBottom>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Paper elevation={0} sx={{ 
+                      p: { xs: 1.5, sm: 2 },
+                      bgcolor: 'rgba(198, 40, 40, 0.1)',
+                      height: '100%'
+                    }}>
+                      <Typography variant="h6" color="error.main" gutterBottom sx={{ fontSize: { xs: '1rem', sm: '1.1rem' } }}>
                         Bancos de Dados
                       </Typography>
                       <List dense>
                         {['PostgreSQL', 'MongoDB', 'Firebase', 'Redis (cache)'].map((tech) => (
                           <ListItem key={tech} sx={{ py: 0 }}>
-                            <ListItemText primary={tech} />
+                            <ListItemText 
+                              primary={tech} 
+                              primaryTypographyProps={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}
+                            />
                           </ListItem>
                         ))}
                       </List>
@@ -148,7 +183,7 @@ export const FAQ = () => {
                   </Grid>
                 </Grid>
 
-                <Typography paragraph>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Todos os sites passam por nosso processo de otimização:
                 </Typography>
 
@@ -162,21 +197,30 @@ export const FAQ = () => {
                   ].map((item) => (
                     <ListItem key={item} sx={{ py: 0 }}>
                       <ListItemText 
-                        primary={item} 
-                        primaryTypographyProps={{ sx: { display: 'flex', alignItems: 'center' } }}
-                      >
-                        <Chip label="✓" size="small" color="success" sx={{ mr: 1 }} />
-                        {item}
-                      </ListItemText>
+                        primary={
+                          <>
+                            <Chip label="✓" size="small" color="success" sx={{ mr: 1, fontSize: '0.75rem' }} />
+                            {item}
+                          </>
+                        } 
+                        primaryTypographyProps={{ 
+                          sx: { display: 'flex', alignItems: 'center' },
+                          fontSize: { xs: '0.85rem', sm: '0.9rem' }
+                        }}
+                      />
                     </ListItem>
                   ))}
                 </List>
 
-                <Paper elevation={0} sx={{ p: 2, bgcolor: '#45357e99', borderRadius: 2 }}>
-                  <Typography fontWeight="bold">
+                <Paper elevation={0} sx={{ 
+                  p: { xs: 1.5, sm: 2 },
+                  bgcolor: '#45357e99', 
+                  borderRadius: 2 
+                }}>
+                  <Typography fontWeight="bold" sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                     Resultado garantido: 
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>
                     Carregamento em menos de 2s na média e scores acima de 90 no PageSpeed Insights.
                   </Typography>
                 </Paper>
@@ -187,19 +231,22 @@ export const FAQ = () => {
             question: "Posso atualizar o conteúdo depois sem saber programar?",
             answer: (
               <Box>
-                <Typography paragraph>Sim! Entregamos:</Typography>
-                <List dense sx={{ listStyleType: 'disc', pl: 4, mb: 2 }}>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>Sim! Entregamos:</Typography>
+                <List dense sx={{ listStyleType: 'disc', pl: { xs: 3, sm: 4 }, mb: 2 }}>
                   {[
                     "Painel administrativo intuitivo (você edita textos, fotos e produtos)",
                     "Vídeo-tutorial personalizado",
                     "Suporte 30 dias gratuito para treinamento",
                   ].map((item, index) => (
                     <ListItem key={index} sx={{ display: 'list-item', py: 0 }}>
-                      <ListItemText primary={item} />
+                      <ListItemText 
+                        primary={item} 
+                        primaryTypographyProps={{ fontSize: { xs: '0.9rem', sm: '0.95rem' } }}
+                      />
                     </ListItem>
                   ))}
                 </List>
-                <Typography>
+                <Typography sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Para e-commerces: você gerencia estoque, cupons e pagamentos sozinho(a).
                 </Typography>
               </Box>
@@ -209,11 +256,11 @@ export const FAQ = () => {
             question: "Meus dados estão seguros?",
             answer: (
               <Box>
-                <Typography paragraph>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Absolutamente. A segurança dos seus dados é nossa prioridade máxima. Nossas soluções seguem rigorosamente a <strong>Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018)</strong>, garantindo:
                 </Typography>
                 
-                <List dense sx={{ listStyleType: 'disc', pl: 4, mb: 2 }}>
+                <List dense sx={{ listStyleType: 'disc', pl: { xs: 3, sm: 4 }, mb: 2 }}>
                   {[
                     "Tratamento ético e transparente de dados pessoais",
                     "Coleta e processamento apenas com finalidades específicas e consentimento",
@@ -221,23 +268,29 @@ export const FAQ = () => {
                     "Procedimentos para acesso, retificação ou exclusão de dados conforme direitos do titular",
                   ].map((item, index) => (
                     <ListItem key={index} sx={{ display: 'list-item', py: 0 }}>
-                      <ListItemText primary={item} />
+                      <ListItemText 
+                        primary={item} 
+                        primaryTypographyProps={{ fontSize: { xs: '0.9rem', sm: '0.95rem' } }}
+                      />
                     </ListItem>
                   ))}
                 </List>
           
-                <Typography paragraph>
+                <Typography paragraph sx={{ fontSize: { xs: '0.95rem', sm: '1rem' } }}>
                   Adotamos medidas técnicas e organizacionais comprovadas, incluindo:
                 </Typography>
                 
-                <List dense sx={{ listStyleType: 'disc', pl: 4, mb: 2 }}>
+                <List dense sx={{ listStyleType: 'disc', pl: { xs: 3, sm: 4 }, mb: 2 }}>
                   {[
                     "Certificados SSL/TLS para todas as transações",
                     "Backups diários e redundância de dados",
                     "Política de acesso restrito e autenticação multifator",
                   ].map((item, index) => (
                     <ListItem key={index} sx={{ display: 'list-item', py: 0 }}>
-                      <ListItemText primary={item} />
+                      <ListItemText 
+                        primary={item} 
+                        primaryTypographyProps={{ fontSize: { xs: '0.9rem', sm: '0.95rem' } }}
+                      />
                     </ListItem>
                   ))}
                 </List>
@@ -255,10 +308,22 @@ export const FAQ = () => {
               border: "1px solid rgba(255, 255, 255, 0.712)",
               color: "white",
               mb: 2,
+              '&:hover': {
+                borderColor: theme.palette.primary.main
+              }
             }}
           >
-            <AccordionSummary expandIcon={<ExpandMore sx={{ color: "white" }} />}>
-              <Typography fontWeight={600}>{item.question}</Typography>
+            <AccordionSummary 
+              expandIcon={<ExpandMore sx={{ color: "white" }} />}
+              sx={{
+                '& .MuiAccordionSummary-content': {
+                  alignItems: 'center'
+                }
+              }}
+            >
+              <Typography fontWeight={600} sx={{ fontSize: { xs: '1rem', sm: '1.1rem' } }}>
+                {item.question}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               {item.answer}

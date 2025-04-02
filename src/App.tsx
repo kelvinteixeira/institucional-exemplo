@@ -1,5 +1,5 @@
 import { Routes } from "./Routes";
-import { ThemeProvider } from "./theme/MaterialUi";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 function App() {
   return (

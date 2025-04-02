@@ -2,7 +2,8 @@ import { styled, keyframes } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Tooltip from "@mui/material/Tooltip";
-import { useWhatsApp } from "../hooks/Whatsapp";
+import { useWhatsApp } from "../hooks/useWhatsapp";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 // Animação de pulso
 const pulse = keyframes`
@@ -20,33 +21,53 @@ const pulse = keyframes`
   }
 `;
 
-const FloatingButton = styled("div")({
+const FloatingButton = styled("div")(({ theme }) => ({
   position: "fixed",
-  bottom: "30px",
-  right: "30px",
-  zIndex: 1000,
-});
+  bottom: theme.spacing(4),
+  right: theme.spacing(4),
+  zIndex: theme.zIndex.speedDial,
+  [theme.breakpoints.down('sm')]: {
+    bottom: theme.spacing(3),
+    right: theme.spacing(2),
+  },
+}));
 
-const PulseButton = styled(IconButton)({
+const PulseButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: "#25D366",
   color: "white",
-  width: "60px",
-  height: "60px",
+  width: theme.spacing(7.5),
+  height: theme.spacing(7.5),
   animation: `${pulse} 2s infinite`,
   "&:hover": {
     backgroundColor: "#128C7E",
   },
-  boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
-});
+  boxShadow: theme.shadows[6],
+  [theme.breakpoints.down('sm')]: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+}));
 
 export const WhatsAppFloatButton = () => {
   const { onClick } = useWhatsApp();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <FloatingButton>
-      <Tooltip title="Fale conosco" placement="left" arrow>
-        <PulseButton onClick={() => onClick()} aria-label="WhatsApp">
-          <WhatsAppIcon sx={{ fontSize: 32 }} />
+      <Tooltip 
+        title="Fale conosco" 
+        placement={isMobile ? "top" : "left"} 
+        arrow
+      >
+        <PulseButton 
+          onClick={() => onClick()} 
+          aria-label="WhatsApp"
+          size={isMobile ? "medium" : "large"}
+        >
+          <WhatsAppIcon sx={{ 
+            fontSize: isMobile ? 28 : 32 
+          }} />
         </PulseButton>
       </Tooltip>
     </FloatingButton>
