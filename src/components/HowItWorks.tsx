@@ -44,7 +44,7 @@ export const HowItWorks = () => {
           {[
             {
               title: "Conversa Inicial",
-              description: "Fale conosco em 5 minutos — vamos entender suas necessidades e objetivos."
+              description: "Mande uma mensagem — vamos entender suas necessidades e objetivos."
             },
             {
               title: "Proposta Personalizada",

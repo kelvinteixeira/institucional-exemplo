@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 
 export const useWhatsApp = () => {
   const phoneNumber = '5583996157313';
-  const defaultMessage = 'Olá, gostaria de tranformar minha idéa em realidade digital!';
+  const defaultMessage = 'Olá, gostaria de tranformar minha ideia em realidade digital!';
 
   const handleWhatsAppClick = useCallback((customMessage?: string) => {
     const cleanedPhone = phoneNumber.replace(/\D/g, '');
