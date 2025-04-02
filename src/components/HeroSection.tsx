@@ -10,7 +10,7 @@ export const HeroSection = () => {
     <Box
       id="home"
       sx={{
-        minHeight: { xs: 'auto', sm: '100vh' },
+        minHeight: { xs: 'auto'},
         pt: { xs: 8, sm: 0 },
         pb: { xs: 8, sm: 0 },
         backgroundImage: "url(/images/bg8.jpeg)",

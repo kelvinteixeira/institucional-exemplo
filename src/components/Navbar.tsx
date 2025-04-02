@@ -1,43 +1,43 @@
-import { useState } from 'react';
-import { 
-  Box, 
-  Container, 
-  AppBar, 
-  Toolbar, 
-  Button, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
+import { useState } from "react";
+import {
+  Box,
+  Container,
+  AppBar,
+  Toolbar,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
   ListItemButton,
   ListItemText,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const Navbar = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // Função para rolagem suave com offset para o navbar
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = document.querySelector('nav')?.clientHeight || 0;
-      const offset = element.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-      
+      const navbarHeight = document.querySelector("nav")?.clientHeight || 0;
+      const offset =
+        element.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
       window.scrollTo({
         top: offset,
-        behavior: "smooth"
+        behavior: "smooth",
       });
-      setMobileOpen(false); // Fecha o drawer após clicar em um link
+      setMobileOpen(false);
     }
   };
 
@@ -47,35 +47,41 @@ export const Navbar = () => {
     { label: "Quem somos", id: "aboutme" },
     { label: "Depoimentos", id: "customers" },
     { label: "Dúvidas", id: "faq" },
-    { label: "Fale conosco", id: "contact", isHighlighted: true }
+    { label: "Fale conosco", id: "contact", isHighlighted: true },
   ];
 
   const drawer = (
-    <Box sx={{ 
-      width: 250,
-      backgroundColor: "#010619",
-      height: '100%',
-      py: 2
-    }}>
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'flex-end',
-        px: 2
-      }}>
+    <Box
+      sx={{
+        width: 250,
+        backgroundColor: "#010619",
+        height: "100%",
+        py: 2,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          px: 2,
+        }}
+      >
         <IconButton onClick={handleDrawerToggle}>
-          <CloseIcon sx={{ color: 'white' }} />
+          <CloseIcon sx={{ color: "white" }} />
         </IconButton>
       </Box>
       <List>
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
-            <ListItemButton 
+            <ListItemButton
               onClick={() => scrollTo(item.id)}
               sx={{
-                color: item.isHighlighted ? theme.palette.primary.main : 'white',
+                color: item.isHighlighted
+                  ? theme.palette.primary.main
+                  : "white",
                 fontWeight: item.isHighlighted ? 600 : 500,
                 py: 1.5,
-                px: 3
+                px: 3,
               }}
             >
               <ListItemText primary={item.label} />
@@ -87,31 +93,35 @@ export const Navbar = () => {
   );
 
   return (
-    <AppBar 
+    <AppBar
       component="nav"
       position="sticky"
       sx={{
         backgroundColor: "#010619",
         backdropFilter: "blur(10px)",
         borderBottom: "2px solid #9336be",
-        boxShadow: 'none',
-        py: 1
+        boxShadow: "none",
+        py: 1,
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-between',
-          px: { xs: 0, md: 2 }
-        }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            px: { xs: 0, md: 2 },
+            width: "100%",
+          }}
+        >
           <Button onClick={() => scrollTo("home")} sx={{ p: 0 }}>
             <img
               src="/images/codevibeLogo.png"
               alt="CodeVibe Logo"
-              style={{ 
-                height: isMobile ? 80 : 100, 
+              style={{
+                height: isMobile ? 50 : 100,
                 cursor: "pointer",
-                transition: 'all 0.3s ease'
+                transition: "all 0.3s ease",
               }}
             />
           </Button>
@@ -122,27 +132,30 @@ export const Navbar = () => {
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerToggle}
-              sx={{ 
-                color: 'white',
-                '&:hover': {
-                  color: theme.palette.primary.main
-                }
+              sx={{
+                color: "white",
+                "&:hover": {
+                  color: theme.palette.primary.main,
+                },
               }}
             >
               <MenuIcon fontSize="large" />
             </IconButton>
           ) : (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{}}>
               {navItems.map((item) => (
                 <Button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
                   sx={{
-                    color: item.isHighlighted ? theme.palette.primary.main : 'white',
+                    color: item.isHighlighted
+                      ? theme.palette.primary.main
+                      : "white",
                     fontWeight: item.isHighlighted ? 600 : 500,
                     textTransform: "none",
-                    fontSize: '1rem',
-                    mx: 0.5,
+                    fontSize: "1rem",
+                    minWidth: "auto",
+                    px: 1.5,
                     "&:hover": {
                       color: theme.palette.primary.main,
                       backgroundColor: "transparent",
@@ -162,13 +175,13 @@ export const Navbar = () => {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            backgroundColor: 'rgba(1, 6, 25, 0.95)',
-            backdropFilter: 'blur(10px)'
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            backgroundColor: "rgba(1, 6, 25, 0.95)",
+            backdropFilter: "blur(10px)",
           },
         }}
       >
