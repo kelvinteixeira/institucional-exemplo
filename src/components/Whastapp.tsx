@@ -25,8 +25,8 @@ const FloatingButton = styled("div")(({ theme }) => ({
   position: "fixed",
   bottom: theme.spacing(4),
   right: theme.spacing(4),
-  zIndex: theme.zIndex.speedDial,
-  [theme.breakpoints.down('sm')]: {
+  zIndex: 1000,
+  [theme.breakpoints.down("sm")]: {
     bottom: theme.spacing(3),
     right: theme.spacing(2),
   },
@@ -41,8 +41,7 @@ const PulseButton = styled(IconButton)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "#128C7E",
   },
-  boxShadow: theme.shadows[6],
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     width: theme.spacing(6),
     height: theme.spacing(6),
   },
@@ -51,23 +50,21 @@ const PulseButton = styled(IconButton)(({ theme }) => ({
 export const WhatsAppFloatButton = () => {
   const { onClick } = useWhatsApp();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <FloatingButton>
-      <Tooltip 
-        title="Fale conosco" 
-        placement={isMobile ? "top" : "left"} 
-        arrow
-      >
-        <PulseButton 
-          onClick={() => onClick()} 
+      <Tooltip title="Fale conosco" placement={isMobile ? "top" : "left"} arrow>
+        <PulseButton
+          onClick={() => onClick()}
           aria-label="WhatsApp"
           size={isMobile ? "medium" : "large"}
         >
-          <WhatsAppIcon sx={{ 
-            fontSize: isMobile ? 28 : 32 
-          }} />
+          <WhatsAppIcon
+            sx={{
+              fontSize: isMobile ? 28 : 32,
+            }}
+          />
         </PulseButton>
       </Tooltip>
     </FloatingButton>
