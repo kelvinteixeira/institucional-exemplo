@@ -77,7 +77,7 @@ export const AboutMe = () => {
               }}
             >
               <Avatar
-                src="/images/eu2.png"
+                src="/images/eu.png"
                 alt="Desenvolvedor"
                 sx={{
                   width: "100%",
