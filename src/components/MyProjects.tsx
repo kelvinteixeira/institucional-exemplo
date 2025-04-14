@@ -19,16 +19,15 @@ interface Project {
 
 export const MyProjects = () => {
   const theme = useTheme();
-  const [currentIndex, setCurrentIndex] = useState(1); // Começa no meio
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Projetos de exemplo - substitua com seus próprios projetos
   const projects: Project[] = [
     {
       id: 1,
       image: "/images/bsProject.png",
-      name: "Escrritório B.S. Advocacia",
+      name: "Escritório B.S. Advocacia",
       url: "https://bsadvogados.netlify.app"
     },
     {
@@ -53,6 +52,7 @@ export const MyProjects = () => {
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
+  // Animations
   const fadeIn = {
     hidden: { opacity: 0 },
     show: {
@@ -76,23 +76,38 @@ export const MyProjects = () => {
     }
   };
 
-  // Função para determinar o tamanho do projeto baseado na posição
+  const cardAnimation = {
+    hidden: { opacity: 0, y: 50 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -50,
+      transition: {
+        duration: 0.4
+      }
+    }
+  };
+
   const getProjectSize = (index: number) => {
     const adjustedIndex = (index - currentIndex + projects.length) % projects.length;
-    
     if (adjustedIndex === 0 || adjustedIndex === 2) {
-      return { width: 280, height: 450 }; // Projetos laterais (menores)
+      return { width: 280, height: 450 };
     }
-    return { width: 320, height: 500 }; // Projeto central (maior)
+    return { width: 320, height: 500 };
   };
 
-  // Função para determinar a opacidade baseado na posição
   const getProjectOpacity = (index: number) => {
     const adjustedIndex = (index - currentIndex + projects.length) % projects.length;
-    return adjustedIndex === 1 ? 1 : 0.7; // Central mais visível
+    return adjustedIndex === 1 ? 1 : 0.7;
   };
 
-  // Mostrar apenas 3 projetos por vez (anterior, atual, próximo)
   const visibleProjects = [
     projects[(currentIndex - 1 + projects.length) % projects.length],
     projects[currentIndex],
@@ -185,86 +200,98 @@ export const MyProjects = () => {
               height: "100%"
             }}
           >
-            {visibleProjects.map((project) => {
-              const size = getProjectSize(project.id);
-              const opacity = getProjectOpacity(project.id);
-              const isCenter = (project.id === projects[currentIndex].id);
+            <AnimatePresence mode="wait">
+              {visibleProjects.map((project) => {
+                const size = getProjectSize(project.id);
+                const opacity = getProjectOpacity(project.id);
+                const isCenter = (project.id === projects[currentIndex].id);
 
-              return (
-                <Box
-                  key={project.id}
-                  sx={{
-                    position: "relative",
-                    borderRadius: 2,
-                    overflow: "hidden",
-                    transition: "all 0.3s ease",
-                    width: size.width,
-                    height: size.height,
-                    opacity: opacity,
-                    transform: isCenter ? "scale(1.05)" : "scale(0.95)",
-                    zIndex: isCenter ? 2 : 1,
-                    boxShadow: isCenter ? theme.shadows[8] : theme.shadows[2]
-                  }}
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                >
-                  <Box
-                    component="img"
-                    src={project.image}
-                    alt={project.name}
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      transition: "all 0.3s ease",
-                      filter: hoveredProject === project.id ? "blur(2px) brightness(0.7)" : "none"
-                    }}
-                  />
+                return (
+                  <motion.div
+                    key={project.id}
+                    variants={cardAnimation}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    layout
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  >
+                    <Box
+                      sx={{
+                        position: "relative",
+                        borderRadius: 2,
+                        overflow: "hidden",
+                        transition: "all 0.3s ease",
+                        width: size.width,
+                        height: size.height,
+                        opacity: opacity,
+                        transform: isCenter ? "scale(1.05)" : "scale(0.95)",
+                        zIndex: isCenter ? 2 : 1,
+                        boxShadow: isCenter ? theme.shadows[8] : theme.shadows[2]
+                      }}
+                      onMouseEnter={() => setHoveredProject(project.id)}
+                      onMouseLeave={() => setHoveredProject(null)}
+                    >
+                      <Box
+                        component="img"
+                        src={project.image}
+                        alt={project.name}
+                        sx={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          transition: "all 0.3s ease",
+                          filter: hoveredProject === project.id ? "blur(2px) brightness(0.7)" : "none"
+                        }}
+                      />
 
-                  <AnimatePresence>
-                    {hoveredProject === project.id && (
-                     <motion.div
-                     initial="hidden"
-                     animate="show"
-                     exit="hidden"
-                     variants={slideFromBottom}
-                     style={{
-                       position: "absolute",
-                       left: 0,
-                       right: 0,
-                       bottom: 15,
-                       display: "flex",
-                       justifyContent: "center", 
-                       alignItems: "center", 
-                       zIndex: 3
-                     }}
-                   >
-                     <Link
-                       href={project.url}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       sx={{
-                         backgroundColor: "rgba(0, 0, 0, 0.7)",
-                         backdropFilter: "blur(4px)",
-                         color: "white",
-                         textDecoration: "none",
-                         fontWeight: 600,
-                         padding: "8px 24px",
-                         borderRadius: "100px",
-                         border: `1px solid ${theme.palette.primary.main}`,
-                         "&:hover": {
-                           color: theme.palette.primary.main,
-                         },
-                       }}
-                     >
-                       {project.name}
-                     </Link>
-                   </motion.div>
-                    )}
-                  </AnimatePresence>
-                </Box>
-              );
-            })}          </Box>
+                      <AnimatePresence>
+                        {hoveredProject === project.id && (
+                          <motion.div
+                            initial="hidden"
+                            animate="show"
+                            exit="hidden"
+                            variants={slideFromBottom}
+                            style={{
+                              position: "absolute",
+                              left: 0,
+                              right: 0,
+                              bottom: 15,
+                              display: "flex",
+                              justifyContent: "center", 
+                              alignItems: "center", 
+                              zIndex: 3
+                            }}
+                          >
+                            <Link
+                              href={project.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              sx={{
+                                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                                backdropFilter: "blur(4px)",
+                                color: "white",
+                                textDecoration: "none",
+                                fontWeight: 600,
+                                padding: "8px 24px",
+                                borderRadius: "100px",
+                                border: `1px solid ${theme.palette.primary.main}`,
+                                "&:hover": {
+                                  color: theme.palette.primary.main,
+                                },
+                              }}
+                            >
+                              {project.name}
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </Box>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </Box>
 
           <IconButton
             onClick={handleNext}
