@@ -52,10 +52,10 @@ export const Customers = () => {
       id="customers"
       sx={{
         py: { xs: 6, sm: 8, md: 10 },
-        backgroundImage: "url(/images/bg7.jpeg)",
+        // backgroundImage: "url(/images/bg7.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundColor: "rgba(1, 6, 25, 0.7)",
+        backgroundColor: "rgb(1, 6, 25)",
         backgroundBlendMode: "overlay",
         backdropFilter: "blur(5px)",
         transform: "scaleX(-1)",
