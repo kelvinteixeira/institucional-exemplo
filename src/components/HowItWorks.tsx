@@ -9,11 +9,46 @@ import {
   MobileStepper,
 } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 interface Step {
   title: string;
   description: string;
 }
+
+// Animations
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3
+    }
+  }
+};
+
+const slideFromTop = {
+  hidden: { opacity: 0, y: -50 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
 
 export const HowItWorks = () => {
   const theme = useTheme();
@@ -67,6 +102,7 @@ export const HowItWorks = () => {
     }
     return () => clearInterval(interval);
   }, [autoPlay, isMobile, maxSteps]);
+
   return (
     <Box
       id="howitworks"
@@ -80,129 +116,143 @@ export const HowItWorks = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            fontWeight: 700,
-            mb: { xs: 4, sm: 6, md: 8 },
-            px: { xs: 2, sm: 0 },
-            fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
-            textShadow: "0 2px 8px rgba(0,0,0,0.2)",
-            position: "relative",
-            "&:after": {
-              content: '""',
-              display: "block",
-              width: "80px",
-              height: "4px",
-              backgroundColor: "primary.main",
-              margin: { xs: "12px auto 0", sm: "16px auto 0" },
-              borderRadius: 2,
-            },
-          }}
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
         >
-          Como Funciona
-        </Typography>
+          <Typography
+            variant="h3"
+            align="center"
+            sx={{
+              fontWeight: 700,
+              mb: { xs: 4, sm: 6, md: 8 },
+              px: { xs: 2, sm: 0 },
+              fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
+              textShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              position: "relative",
+              "&:after": {
+                content: '""',
+                display: "block",
+                width: "80px",
+                height: "4px",
+                backgroundColor: "primary.main",
+                margin: { xs: "12px auto 0", sm: "16px auto 0" },
+                borderRadius: 2,
+              },
+            }}
+          >
+            Como Funciona
+          </Typography>
+        </motion.div>
 
         {isMobile ? (
           <Box sx={{ position: "relative" }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                position: "relative",
-                minHeight: 300,
-              }}
+            <motion.div
+              key={activeStep}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <Box
                 sx={{
-                  backgroundColor: "#010619a4",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.712)",
-                  borderRadius: 3,
-                  p: 4,
-                  width: "90%",
-                  maxWidth: 400,
-                  textAlign: "center",
-                  transition: "all 0.5s ease",
-                  boxShadow: theme.shadows[10],
-                  position: "absolute",
-                  top: 0,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  zIndex: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  position: "relative",
+                  minHeight: 300,
                 }}
               >
-                <Typography
-                  variant="h2"
-                  color="primary"
+                <Box
                   sx={{
-                    mb: 2,
-                    fontSize: "3rem",
+                    backgroundColor: "#010619a4",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255, 255, 255, 0.712)",
+                    borderRadius: 3,
+                    p: 4,
+                    width: "90%",
+                    maxWidth: 400,
+                    textAlign: "center",
+                    transition: "all 0.5s ease",
+                    boxShadow: theme.shadows[10],
+                    position: "absolute",
+                    top: 0,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    zIndex: 2,
                   }}
                 >
-                  {activeStep + 1}
-                </Typography>
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{
+                      mb: 2,
+                      fontSize: "3rem",
+                    }}
+                  >
+                    {activeStep + 1}
+                  </Typography>
 
-                <Typography
-                  variant="h5"
-                  sx={{
-                    mb: 1.5,
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  {steps[activeStep].title}
-                </Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      mb: 1.5,
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    {steps[activeStep].title}
+                  </Typography>
 
-                <Typography
-                  variant="body1"
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: "1rem",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {steps[activeStep].description}
+                  </Typography>
+                </Box>
+
+                <IconButton
+                  onClick={handleBack}
                   sx={{
-                    color: "rgba(255, 255, 255, 0.8)",
-                    fontSize: "1rem",
-                    lineHeight: 1.6,
+                    position: "absolute",
+                    left: 8,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    zIndex: 3,
+                    color: "white",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                    },
                   }}
                 >
-                  {steps[activeStep].description}
-                </Typography>
+                  <KeyboardArrowLeft fontSize="large" />
+                </IconButton>
+
+                <IconButton
+                  onClick={handleNext}
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    zIndex: 3,
+                    color: "white",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  <KeyboardArrowRight fontSize="large" />
+                </IconButton>
               </Box>
-
-              <IconButton
-                onClick={handleBack}
-                sx={{
-                  position: "absolute",
-                  left: 8,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  zIndex: 3,
-                  color: "white",
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  "&:hover": {
-                    backgroundColor: theme.palette.primary.main,
-                  },
-                }}
-              >
-                <KeyboardArrowLeft fontSize="large" />
-              </IconButton>
-
-              <IconButton
-                onClick={handleNext}
-                sx={{
-                  position: "absolute",
-                  right: 8,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  zIndex: 3,
-                  color: "white",
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  "&:hover": {
-                    backgroundColor: theme.palette.primary.main,
-                  },
-                }}
-              >
-                <KeyboardArrowRight fontSize="large" />
-              </IconButton>
-            </Box>
+            </motion.div>
 
             <MobileStepper
               steps={maxSteps}
@@ -225,6 +275,11 @@ export const HowItWorks = () => {
           </Box>
         ) : (
           <Box
+            component={motion.div}
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
             sx={{
               display: "grid",
               gridTemplateColumns: {
@@ -235,56 +290,61 @@ export const HowItWorks = () => {
             }}
           >
             {steps.map((step, index) => (
-              <Box
+              <motion.div
                 key={index}
-                sx={{
-                  backgroundColor: "#010619a4",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.712)",
-                  borderRadius: 3,
-                  p: { xs: 2.5, sm: 3 },
-                  height: "100%",
-                  textAlign: "center",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-8px)",
-                    borderColor: theme.palette.primary.main,
-                    boxShadow: theme.shadows[8],
-                  },
-                }}
+                variants={slideFromTop}
+                transition={{ delay: index * 0.3 }} // Atraso de 0.3s entre cada card
               >
-                <Typography
-                  variant="h2"
-                  color="primary"
+                <Box
                   sx={{
-                    mb: { xs: 1, sm: 2 },
-                    fontSize: { xs: "2.5rem", sm: "3rem" },
+                    backgroundColor: "#010619a4",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255, 255, 255, 0.712)",
+                    borderRadius: 3,
+                    p: { xs: 2.5, sm: 3 },
+                    height: "100%",
+                    textAlign: "center",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-8px)",
+                      borderColor: theme.palette.primary.main,
+                      boxShadow: theme.shadows[8],
+                    },
                   }}
                 >
-                  {index + 1}
-                </Typography>
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{
+                      mb: { xs: 1, sm: 2 },
+                      fontSize: { xs: "2.5rem", sm: "3rem" },
+                    }}
+                  >
+                    {index + 1}
+                  </Typography>
 
-                <Typography
-                  variant="h5"
-                  sx={{
-                    mb: { xs: 1, sm: 1.5 },
-                    fontSize: { xs: "1.25rem", sm: "1.5rem" },
-                  }}
-                >
-                  {step.title}
-                </Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      mb: { xs: 1, sm: 1.5 },
+                      fontSize: { xs: "1.25rem", sm: "1.5rem" },
+                    }}
+                  >
+                    {step.title}
+                  </Typography>
 
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "rgba(255, 255, 255, 0.8)",
-                    fontSize: { xs: "0.875rem", sm: "0.9375rem" },
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {step.description}
-                </Typography>
-              </Box>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: { xs: "0.875rem", sm: "0.9375rem" },
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {step.description}
+                  </Typography>
+                </Box>
+              </motion.div>
             ))}
           </Box>
         )}

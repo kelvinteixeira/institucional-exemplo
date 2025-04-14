@@ -8,6 +8,41 @@ import {
   useTheme
 } from "@mui/material";
 import { StarBorder } from "@mui/icons-material";
+import { motion } from "framer-motion";
+
+// Animations
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const slideFromLeft = {
+  hidden: { opacity: 0, x: -50 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
 
 export const Customers = () => {
   const theme = useTheme();
@@ -30,21 +65,46 @@ export const Customers = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            fontWeight: 700,
-            mb: { xs: 4, sm: 6, md: 8 },
-            px: { xs: 2, sm: 0 },
-            fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem' },
-            lineHeight: { xs: 1.3, sm: 1.2 },
-            textShadow: "0 2px 8px rgba(0,0,0,0.2)",
-          }}
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
         >
-          O que dizem nossos clientes
-        </Typography>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+           <Typography
+            variant="h3"
+            align="center"
+            sx={{
+              fontWeight: 700,
+              mb: { xs: 4, sm: 6, md: 8 },
+              px: { xs: 2, sm: 0 },
+              fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
+              textShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              position: "relative",
+              "&:after": {
+                content: '""',
+                display: "block",
+                width: "80px",
+                height: "4px",
+                backgroundColor: "primary.main",
+                margin: { xs: "12px auto 0", sm: "16px auto 0" },
+                borderRadius: 2,
+              },
+            }}
+          >
+            O que nossos clientes dizem
+          </Typography>
+        </motion.div>
+        
+        <Grid 
+          container 
+          spacing={{ xs: 2, sm: 3, md: 4 }}
+          component={motion.div}
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {[
             {
               name: "Ana Paula Santos",
@@ -84,13 +144,9 @@ export const Customers = () => {
               xs={12} 
               sm={6} 
               key={index}
-              sx={{
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                  zIndex: 1
-                }
-              }}
+              component={motion.div}
+              variants={slideFromLeft}
+              transition={{ delay: index * 0.2 }}
             >
               <Box
                 sx={{

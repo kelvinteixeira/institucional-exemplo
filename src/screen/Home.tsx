@@ -9,6 +9,7 @@ import { FAQ } from "../components/FAQ";
 import { Contact } from "../components/Contact";
 import { WhatsAppFloatButton } from "../components/Whastapp";
 import { AboutMe } from "../components/AboutMe";
+import { MyProjects } from "../components/MyProjects";
 
 export const HomePage = () => {
   return (
@@ -23,6 +24,7 @@ export const HomePage = () => {
       <Features />
       <HowItWorks />
       <AboutMe />
+      <MyProjects />
       <Customers />
       <FAQ />
       <Contact />

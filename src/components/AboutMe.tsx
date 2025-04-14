@@ -20,6 +20,43 @@ import {
   Email,
   GitHub,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
+
+// Animations
+const slideFromLeft = {
+  hidden: { opacity: 0, x: -100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const slideFromRight = {
+  hidden: { opacity: 0, x: 100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
 
 export const AboutMe = () => {
   const theme = useTheme();
@@ -38,32 +75,47 @@ export const AboutMe = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          align="center"
-          sx={{
-            fontWeight: 700,
-            mb: { xs: 4, sm: 6, md: 8 },
-            px: { xs: 2, sm: 0 },
-            fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
-            textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-            position: "relative",
-            "&:after": {
-              content: '""',
-              display: "block",
-              width: { xs: "60px", sm: "80px" },
-              height: "4px",
-              backgroundColor: "primary.main",
-              margin: { xs: "16px auto 0", sm: "20px auto 0" },
-              borderRadius: 2,
-            },
-          }}
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
         >
-          Por trás da Codevibe Solutions
-        </Typography>
+          <Typography
+            variant="h2"
+            align="center"
+            sx={{
+              fontWeight: 700,
+              mb: { xs: 4, sm: 6, md: 8 },
+              px: { xs: 2, sm: 0 },
+              fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
+              textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+              position: "relative",
+              "&:after": {
+                content: '""',
+                display: "block",
+                width: { xs: "60px", sm: "80px" },
+                height: "4px",
+                backgroundColor: "primary.main",
+                margin: { xs: "16px auto 0", sm: "20px auto 0" },
+                borderRadius: 2,
+              },
+            }}
+          >
+            Por trás da Codevibe Solutions
+          </Typography>
+        </motion.div>
 
-        <Grid container spacing={{ xs: 4, sm: 6, md: 8 }} alignItems="center">
-          <Grid item xs={12} md={5}>
+        <Grid 
+          container 
+          spacing={{ xs: 4, sm: 6, md: 8 }} 
+          alignItems="center"
+          component={motion.div}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <Grid item xs={12} md={5} component={motion.div} variants={slideFromLeft}>
             <Box
               sx={{
                 position: "relative",
@@ -107,7 +159,7 @@ export const AboutMe = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} md={7} component={motion.div} variants={slideFromRight}>
             <Box
               sx={{
                 backgroundColor: "rgba(1, 6, 25, 0.7)",
