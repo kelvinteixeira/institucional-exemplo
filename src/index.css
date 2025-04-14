@@ -6,3 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif !important;
 }
+
+html {
+  scrollbar-color: #9336be #020c1b;
+}
