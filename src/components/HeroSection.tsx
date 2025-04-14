@@ -20,7 +20,7 @@ const slideFromRight = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.4,
       ease: "easeOut"
     }
   }
@@ -32,7 +32,7 @@ const slideFromBottom = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.4,
       ease: "easeOut"
     }
   }
@@ -44,7 +44,7 @@ const slideFromLeft = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.4,
       ease: "easeOut"
     }
   }
@@ -196,7 +196,7 @@ export const HeroSection = () => {
                     width: "100%",
                     height: 'auto',
                     borderRadius: 8,
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    border: "1px solid rgba(255, 255, 255, 0.4)",
                   }}
                 />
               </Box>

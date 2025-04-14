@@ -45,6 +45,7 @@ export const Navbar = () => {
     { label: "Diferencial", id: "features" },
     { label: "Desenvolvimento", id: "howitworks" },
     { label: "Quem somos", id: "aboutme" },
+    { label: "Projetos", id: "projects" },
     { label: "Depoimentos", id: "customers" },
     { label: "Dúvidas", id: "faq" },
     { label: "Fale conosco", id: "contact", isHighlighted: true },
@@ -106,12 +107,13 @@ export const Navbar = () => {
     >
       <Container maxWidth="lg">
         <Toolbar
-          sx={{
+           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             px: { xs: 0, md: 2 },
             width: "100%",
+            gap: 5, 
           }}
         >
           <Button onClick={() => scrollTo("home")} sx={{ p: 0 }}>
@@ -142,20 +144,23 @@ export const Navbar = () => {
               <MenuIcon fontSize="large" />
             </IconButton>
           ) : (
-            <Box sx={{}}>
+            <Box sx={{ 
+              display: "flex",
+              flexWrap: "nowrap", // Garante que os itens não quebrem linha
+              gap: 1, // Espaçamento entre botões (ajuste conforme necessário)
+            }}>
               {navItems.map((item) => (
                 <Button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
                   sx={{
-                    color: item.isHighlighted
-                      ? theme.palette.primary.main
-                      : "white",
+                    color: item.isHighlighted ? theme.palette.primary.main : "white",
                     fontWeight: item.isHighlighted ? 600 : 500,
                     textTransform: "none",
-                    fontSize: "1rem",
-                    minWidth: "auto",
-                    px: 1.5,
+                    fontSize: "0.9rem", // Reduz um pouco o tamanho da fonte
+                    whiteSpace: "nowrap", // Impede quebra de linha EM TODOS OS ITENS
+                    px: 1, // Padding horizontal reduzido
+                    minWidth: "fit-content", // Ajusta a largura ao conteúdo
                     "&:hover": {
                       color: theme.palette.primary.main,
                       backgroundColor: "transparent",
