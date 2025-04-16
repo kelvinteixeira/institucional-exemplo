@@ -9,7 +9,9 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3
+      when: "beforeChildren",
+      staggerChildren: 0,
+      delayChildren: 0
     }
   }
 };

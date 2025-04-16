@@ -33,7 +33,7 @@ export const MyProjects = () => {
     {
       id: 2,
       image: "/images/alenilsonProject.png",
-      name: "Site Institucional Psicólogo Alenilson",
+      name: "Institucional Psicólogo Alenilson",
       url: "https://alenilsonpsi.netlify.app"
     },
     {
@@ -41,6 +41,12 @@ export const MyProjects = () => {
       image: "/images/portfolioProject.png",
       name: "Portfólio Kelvin Teixeira",
       url: "https://kelvins-portfolio.netlify.app"
+    },
+    {
+      id: 4,
+      image: "/images/jvProject.png",
+      name: "Landing page Dr. João Vitor.",
+      url: "https://joaovitoradv.netlify.app"
     },
   ];
 
@@ -268,6 +274,7 @@ export const MyProjects = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                               sx={{
+                                fontSize: ".8rem",
                                 backgroundColor: "rgba(0, 0, 0, 0.7)",
                                 backdropFilter: "blur(4px)",
                                 color: "white",
