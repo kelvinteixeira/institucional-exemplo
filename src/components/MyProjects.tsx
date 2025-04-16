@@ -83,7 +83,7 @@ export const MyProjects = () => {
   };
 
   const cardAnimation = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 1, y: 0 }, // Removi o fade (opacity: 0)
     show: {
       opacity: 1,
       y: 0,
@@ -93,8 +93,8 @@ export const MyProjects = () => {
       }
     },
     exit: {
-      opacity: 0,
-      y: -50,
+      opacity: 1, // Removi o fade (opacity: 0)
+      y: 0,
       transition: {
         duration: 0.4
       }
@@ -206,7 +206,7 @@ export const MyProjects = () => {
               height: "100%"
             }}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="sync"> {/* Alterado de "wait" para "sync" */}
               {visibleProjects.map((project) => {
                 const size = getProjectSize(project.id);
                 const opacity = getProjectOpacity(project.id);
