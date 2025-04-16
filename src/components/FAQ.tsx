@@ -124,9 +124,9 @@ export const FAQ = () => {
                   </Typography>
                   <List dense sx={{ listStyleType: 'disc', pl: { xs: 3, sm: 4 }, mb: 2 }}>
                     {[
-                      { primary: "Landing pages:", secondary: "7 a 14 dias" },
-                      { primary: "Sites institucionais:", secondary: "3 a 6 semanas" },
-                      { primary: "E-commerces:", secondary: "4 a 8 semanas" },
+                      { primary: "Landing pages:", secondary: "1 a 14 dias" },
+                      { primary: "Sites institucionais:", secondary: "1 a 3 semanas" },
+                      { primary: "E-commerces:", secondary: "3 a 6 semanas" },
                     ].map((item, index) => (
                       <ListItem key={index} sx={{ display: 'list-item', py: 0 }}>
                         <ListItemText 
@@ -165,7 +165,7 @@ export const FAQ = () => {
                           Front-end
                         </Typography>
                         <List dense>
-                          {['React/Next.js', 'TypeScript', 'Tailwind CSS/MUI', 'GSAP para animações'].map((tech) => (
+                          {['React/Next.js', 'TypeScript', 'Material UI', 'Framer motion para animações'].map((tech) => (
                             <ListItem key={tech} sx={{ py: 0 }}>
                               <ListItemText 
                                 primary={tech} 
@@ -229,7 +229,7 @@ export const FAQ = () => {
                           Bancos de Dados
                         </Typography>
                         <List dense>
-                          {['PostgreSQL', 'MongoDB', 'Firebase', 'Redis (cache)'].map((tech) => (
+                          {['PostgreSQL', 'MongoDB', 'Firebase'].map((tech) => (
                             <ListItem key={tech} sx={{ py: 0 }}>
                               <ListItemText 
                                 primary={tech} 
@@ -249,7 +249,6 @@ export const FAQ = () => {
                   <List dense sx={{ mb: 2 }}>
                     {[
                       "Otimização de imagens (WebP/AVIF)",
-                      "Minificação de código (Terser, CSSNano)",
                       "Lazy loading",
                       "CDN global (Cloudflare, Vercel Edge)",
                       "Testes de velocidade (Google PageSpeed, WebPageTest)",
