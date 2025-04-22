@@ -3,7 +3,6 @@ import {
   Container,
   Grid,
   Typography,
-  Avatar,
   Chip,
   Divider,
   useTheme,
@@ -30,9 +29,9 @@ const slideFromLeft = {
     x: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const slideFromRight = {
@@ -42,9 +41,9 @@ const slideFromRight = {
     x: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const fadeIn = {
@@ -53,9 +52,9 @@ const fadeIn = {
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 export const AboutMe = () => {
@@ -106,16 +105,22 @@ export const AboutMe = () => {
           </Typography>
         </motion.div>
 
-        <Grid 
-          container 
-          spacing={{ xs: 4, sm: 6, md: 8 }} 
+        <Grid
+          container
+          spacing={{ xs: 4, sm: 6, md: 8 }}
           alignItems="center"
           component={motion.div}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <Grid item xs={12} md={5} component={motion.div} variants={slideFromLeft}>
+          <Grid
+            item
+            xs={12}
+            md={5}
+            component={motion.div}
+            variants={slideFromLeft}
+          >
             <Box
               sx={{
                 position: "relative",
@@ -128,20 +133,29 @@ export const AboutMe = () => {
                 },
               }}
             >
-              <Avatar
-                src="/images/eu.png"
-                alt="Desenvolvedor"
+              <Box
                 sx={{
                   width: "100%",
-                  height: "auto",
-                  aspectRatio: "1/1",
+                  aspectRatio: "1 / 1",
                   borderRadius: 3,
+                  overflow: "hidden",
                   border: "2px solid #9336be",
                   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
                   position: "relative",
                   zIndex: 2,
                 }}
-              />
+              >
+                <img
+                  src="/images/eu.jpeg"
+                  alt="Desenvolvedor"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover", 
+                    objectPosition: "top",
+                  }}
+                />
+              </Box>
               <Box
                 sx={{
                   position: "absolute",
@@ -159,7 +173,13 @@ export const AboutMe = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={7} component={motion.div} variants={slideFromRight}>
+          <Grid
+            item
+            xs={12}
+            md={7}
+            component={motion.div}
+            variants={slideFromRight}
+          >
             <Box
               sx={{
                 backgroundColor: "rgba(1, 6, 25, 0.7)",
@@ -276,7 +296,7 @@ export const AboutMe = () => {
                   <IconButton
                     aria-label="LinkedIn"
                     color="primary"
-                    href="https://www.linkedin.com/in/kelvin-teixeira-8707b41a8/" 
+                    href="https://www.linkedin.com/in/kelvin-teixeira-8707b41a8/"
                     target="_blank"
                     sx={{
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -295,7 +315,7 @@ export const AboutMe = () => {
                   <IconButton
                     aria-label="GitHub"
                     color="primary"
-                    href="https://github.com/kelvinteixeira" 
+                    href="https://github.com/kelvinteixeira"
                     target="_blank"
                     sx={{
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -314,7 +334,7 @@ export const AboutMe = () => {
                   <IconButton
                     aria-label="Instagram"
                     color="primary"
-                    href="https://www.instagram.com/kelvinteixeira_/" 
+                    href="https://www.instagram.com/kelvinteixeira_/"
                     target="_blank"
                     sx={{
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
